@@ -21,8 +21,7 @@
 %%%-------------------------------------------------------
 %%% START/STOP EXPORTS
 %%%-------------------------------------------------------
-start_link() ->
-    supervisor:start_link({local, ?MODULE}, ?MODULE, []).
+start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 %%%-------------------------------------------------------
 %%% INTERNAL EXPORTS

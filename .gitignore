@@ -4,6 +4,7 @@
 *.plt
 erl_crash.dump
 .concrete/DEV_MODE
+.idea
 
 # rebar 2.x
 .rebar
