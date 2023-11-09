@@ -32,7 +32,7 @@ init([]) ->
     ets:new(users, [public, named_table]),
     UsersAPIConf = #{
         name => erfwong,
-        spec_path => <<"apis/users/users.json">>,
+        spec_path => <<"apis/users/users2.json">>,
         callback => users_callback,
         port => 8080,
         swagger_ui => true,
