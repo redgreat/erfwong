@@ -6,12 +6,13 @@
 %%% @end
 %%% Created : 02. 1月 2024 10:01
 %%%-------------------------------------------------------------------
--module(tb_userinfo_callback2).
+-module(users_callback2).
 -author("wangcw").
 
 %% API
 -export([start/0, stop/1, insert/2, delete/2, update/2, select/2]).
 
+-include("users.hrl").
 -include_lib("mysql/include/mysql.hrl").
 -include_lib("lager/include/lager.hrl").
 
