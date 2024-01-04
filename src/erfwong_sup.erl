@@ -34,11 +34,14 @@ start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
     % Users storage
-    ets:new(users, [public, named_table]),
+    % ets:new(users, [public, named_table]),
     UsersAPIConf = #{
         name => erfwong,
         spec_path => <<"apis/users/users2.json">>,
         callback => users_callback2,
+        preprocess_middlewares => [erfwong_preprocess_middleware],
+        postprocess_middlewares => [erfwong_postprocess_middleware],
+        % static_file => '',
         port => 8080,
         swagger_ui => true,
         log_level => debug
@@ -51,7 +54,26 @@ init([]) ->
         worker,
         [erf]
     },
-    {ok, {{one_for_one, 5, 10}, [UsersChildSpec]}}.
+    TrackerAPIConf = #{
+        name => erfwong,
+        spec_path => <<"apis/tracker/tracker.json">>,
+        callback => tracker_callback,
+        preprocess_middlewares => [erfwong_preprocess_middleware],
+        postprocess_middlewares => [erfwong_postprocess_middleware],
+        % static_file => '',
+        port => 8080,
+        swagger_ui => true,
+        log_level => debug
+    },
+    TrackerChildSpec = {
+        public_api_server,
+        {erf, start_link, [TrackerAPIConf]},
+        permanent,
+        5000,
+        worker,
+        [erf]
+    },
+    {ok, {{one_for_one, 5, 10}, [UsersChildSpec, TrackerChildSpec]}}.
 
 %%%===================================================================
 %%% Internal functions

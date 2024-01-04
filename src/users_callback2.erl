@@ -23,7 +23,9 @@ start() ->
     {ok, DbUser} = application:get_env(rosemysql, db_user),
     {ok, DbPasswd} = application:get_env(rosemysql, db_password),
     {ok, DbName} = application:get_env(rosemysql, db_name),
-    {ok, Pid} = mysql:start_link([{host, DbHost}, {port, DbPort}, {user, DbUser}, {password, DbPasswd}, {database, DbName}]),
+    {ok, Pid} = mysql:start_link([
+        {host, DbHost}, {port, DbPort}, {user, DbUser}, {password, DbPasswd}, {database, DbName}
+    ]),
     Pid.
 
 stop(Pid) ->
@@ -31,23 +33,25 @@ stop(Pid) ->
 
 insert(Pid, Data) ->
     case
-        mysql:query(Pid, "INSERT INTO tb_userinfo (name, age) VALUES (?, ?)", [Data#user.name, Data#user.age])
+        mysql:query(Pid, "INSERT INTO tb_userinfo (name, age) VALUES (?, ?)", [
+            Data#user.name, Data#user.age
+        ])
     of
         {ok, _} -> ok;
         {error, Reason} -> lager:error("Insert failed: ~p", [Reason])
     end.
 
 delete(Pid, UserId) ->
-    case
-        mysql:query(Pid, "DELETE FROM tb_userinfo WHERE id = ?", [UserId])
-    of
+    case mysql:query(Pid, "DELETE FROM tb_userinfo WHERE id = ?", [UserId]) of
         {ok, _} -> ok;
         {error, Reason} -> lager:error("Insert failed: ~p", [Reason])
     end.
 
 update(Pid, Data) ->
     case
-        mysql:query(Pid, "UPDATE tb_userinfo SET name = ?, age = ? WHERE id = ?", [Data#user.name, Data#user.age, Data#user.id])
+        mysql:query(Pid, "UPDATE tb_userinfo SET name = ?, age = ? WHERE id = ?", [
+            Data#user.name, Data#user.age, Data#user.id
+        ])
     of
         {ok, _} -> ok;
         {error, Reason} -> lager:error("Insert failed: ~p", [Reason])
@@ -57,8 +61,10 @@ select(Pid, UserId) ->
     case mysql:query(Pid, "SELECT * FROM tb_userinfo WHERE id = ?", [UserId]) of
         {ok, Result} ->
             Rows = mysql:fetch_all(Result),
-            {ok, Rows}; % 返回查询结果
+            % 返回查询结果
+            {ok, Rows};
         {error, Reason} ->
             lager:error("Select failed: ~p", [Reason]),
-            {error, Reason} % 返回错误原因
+            % 返回错误原因
+            {error, Reason}
     end.

@@ -50,9 +50,12 @@ start(_StartType, _StartArgs) ->
 %%--------------------------------------------------------------------
 
 stop(_State) ->
+    application:stop(syntax_tools),
+    application:stop(compiler),
+    application:stop(goldrush),
+    application:stop(lager),
     ok.
 
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
-

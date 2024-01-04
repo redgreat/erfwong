@@ -13,7 +13,10 @@
     mysql,
     ncalendar,
     ndto,
-    njson
+    njson,
+    rebar3_ex_doc,
+    erlfmt,
+    rebar3_ndto
    ]},
   {env,[]},
   {modules, []},
