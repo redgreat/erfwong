@@ -13,8 +13,8 @@
 -export([start/0, stop/1, insert/2, delete/2, update/2, select/2]).
 
 -include("users.hrl").
--include_lib("mysql/include/mysql.hrl").
--include_lib("lager/include/lager.hrl").
+%% -include_lib("mysql/include/mysql.hrl").
+%% -include_lib("lager/include/lager.hrl").
 
 start() ->
     %% application:start(lager).

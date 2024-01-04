@@ -5,11 +5,20 @@
   {mod, {erfwong_app, []}},
   {applications,
    [kernel,
-    stdlib
+    stdlib,
+    elli,
+    erf,
+    goldrush,
+    lager,
+    mysql,
+    ncalendar,
+    ndto,
+    njson
    ]},
   {env,[]},
   {modules, []},
 
   {licenses, ["Apache-2.0"]},
-  {links, []}
+  {links,[{"Github",
+           "https://github.com/redgreat/erfwong"}]}
  ]}.
