@@ -5,6 +5,10 @@
     "version": "1.0.0",
     "description": "A REST API for a simple user management service."
   },
+  "servers": [ {
+    "url": "https://api.server.test/v1",
+    "description": "Server description"
+  } ],
   "paths": {
     "/users": {
       "post": {

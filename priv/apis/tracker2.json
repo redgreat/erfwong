@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "tracker",
+    "version": "1.0.0",
+    "description": "轨迹回放API."
+  },
+  "paths": {
+    "/location": {
+      "get": {
+        "summary": "定位信息获取",
+        "deprecated": false,
+        "description": "定位信息获取API",
+        "operationId": "getLocation",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "imei",
+            "in": "path",
+            "description": "设备编码",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "inDate",
+            "in": "path",
+            "description": "开始时间",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "path",
+            "description": "结束时间",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apikey-header-x-api-key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "apikey-header-x-api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "开发环境"
+    }
+  ]
+}

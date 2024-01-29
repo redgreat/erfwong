@@ -34,46 +34,45 @@ start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
     % Users storage
-    % ets:new(users, [public, named_table]),
+    ets:new(users, [public, named_table]),
     UsersAPIConf = #{
-        name => erfwong,
-        spec_path => <<"apis/users/users2.json">>,
-        callback => users_callback2,
-        preprocess_middlewares => [erfwong_preprocess_middleware],
-        postprocess_middlewares => [erfwong_postprocess_middleware],
-        % static_file => '',
+        name => userapi,
+        spec_path => <<"priv/apis/users.json">>,
+        callback => users_callback,
+        % preprocess_middlewares => [erfwong_preprocess],
+        % postprocess_middlewares => [erfwong_postprocess],
         port => 8080,
         swagger_ui => true,
         log_level => debug
     },
     UsersChildSpec = {
-        public_api_server,
+        user_api_server,
         {erf, start_link, [UsersAPIConf]},
         permanent,
         5000,
         worker,
         [erf]
     },
-    TrackerAPIConf = #{
-        name => erfwong,
-        spec_path => <<"apis/tracker/tracker.json">>,
+    LocationAPIConf = #{
+        name => locationapi,
+        spec_path => <<"priv/apis/tracker.json">>,
+        static_routes => [{<<"/:Resource">>, {dir, <<"priv/static">>}}],
         callback => tracker_callback,
-        preprocess_middlewares => [erfwong_preprocess_middleware],
-        postprocess_middlewares => [erfwong_postprocess_middleware],
-        % static_file => '',
-        port => 8080,
+        % preprocess_middlewares => [erfwong_preprocess],
+        % postprocess_middlewares => [erfwong_postprocess],
+        port => 8081,
         swagger_ui => true,
         log_level => debug
     },
-    TrackerChildSpec = {
-        public_api_server,
-        {erf, start_link, [TrackerAPIConf]},
+    LocationChildSpec = {
+        location_api_server,
+        {erf, start_link, [LocationAPIConf]},
         permanent,
         5000,
         worker,
         [erf]
     },
-    {ok, {{one_for_one, 5, 10}, [UsersChildSpec, TrackerChildSpec]}}.
+    {ok, {{one_for_one, 5, 10}, [UsersChildSpec, LocationChildSpec]}}.
 
 %%%===================================================================
 %%% Internal functions

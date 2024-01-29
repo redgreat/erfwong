@@ -1,0 +1,208 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "轨迹回放 REST API",
+    "version": "1.0.0",
+    "description": "个人轨迹查询.",
+    "contact": {
+      "name": "API Support",
+      "url": "https://www.wongcw.cn",
+      "email": "rubygreat@msn.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "本地测试服务器"
+    }
+  ],
+  "paths": {
+    "/location": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/imei"
+        },
+        {
+          "$ref": "#/components/parameters/startDate"
+        },
+        {
+          "$ref": "#/components/parameters/endDate"
+        }
+      ],
+      "get": {
+        "operationId": "getLocation",
+        "summary": "定位信息查询GET方法",
+        "tags": [
+          "定位分组"
+        ],
+        "description": "定位信息查询GET方法",
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carlocdaily"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "imei": {
+        "name": "imei",
+        "in": "query",
+        "description": "设备号",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "16053489111"
+        }
+      },
+      "startDate": {
+        "name": "startDate",
+        "in": "query",
+        "description": "开始时间",
+        "required": true,
+        "style": "deepObject",
+        "schema": {
+          "type": "string",
+          "example": "2024-01-27 21:12:30"
+        }
+      },
+      "endDate": {
+        "name": "endDate",
+        "in": "query",
+        "description": "结束时间",
+        "style": "deepObject",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "2024-01-28 21:12:30"
+        }
+      },
+      "api-key": {
+        "name": "token",
+        "in": "header",
+        "description": "API-KEY",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/securitySchemes/api_key"
+        },
+        "style": "simple",
+        "example": "123456789"
+      }
+    },
+    "schemas": {
+      "Carlocdaily": {
+        "description": "车辆定位信息Model",
+        "type": "object",
+        "required": [
+          "tracktime",
+          "imei",
+          "lat",
+          "lng",
+          "direct",
+          "sped",
+          "hight"
+        ],
+        "properties": {
+          "tracktime": {
+            "type": "string",
+            "description": "设备定位时间"
+          },
+          "imei": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 20,
+            "description": "设备号",
+            "default": "16053489111"
+          },
+          "lat": {
+            "type": "number",
+            "format": "float",
+            "description": "定位纬度"
+          },
+          "lng": {
+            "type": "number",
+            "format": "float",
+            "description": "定位经度"
+          },
+          "dirct": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "定位方向角"
+          },
+          "speed": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "移动速度",
+            "default": 0
+          },
+          "hight": {
+            "type": "integer",
+            "format": "int32",
+            "description": "海拔"
+          }
+        },
+        "example": {
+          "tracktime": "2024-01-26 19:29:59",
+          "imei": "16053489111",
+          "lat": 36.411947,
+          "lng": 120.521212,
+          "dirct": 251,
+          "speed": 1,
+          "hight": 0
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Interval Server Error!"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header",
+        "description": "API_KEY"
+      }
+    }
+  }
+}
