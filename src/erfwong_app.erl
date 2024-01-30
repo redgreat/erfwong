@@ -37,7 +37,7 @@ start(_StartType, _StartArgs) ->
     application:start(compiler),
     application:start(goldrush),
     application:start(lager),
-    % mysql_pool:start(),
+    mysql_pool:start(),
     erfwong_sup:start_link().
 
 %%--------------------------------------------------------------------
@@ -55,7 +55,7 @@ stop(_State) ->
     application:stop(compiler),
     application:stop(goldrush),
     application:stop(lager),
-    % mysql_pool:stop(),
+    mysql_pool:stop(),
     ok.
 
 %%%===================================================================
