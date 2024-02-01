@@ -32,12 +32,11 @@
 %%--------------------------------------------------------------------
 preprocess(#{headers := Headers} = Request) ->
     Authorization = proplists:get_value(<<"x-api-key">>, Headers, undefined),
-    io:format("Authorization: ~p~n",[Authorization]),
     case is_authorized(Authorization) of
         false ->
             % For delete operations, if delete is disabled,
             % we skip to the post-process middlewares.
-            {stop, {403, [], <<"Missing valid basic authorization header">>}};
+            {stop, {403, [], #{<<"msg">> => <<"鉴权失败！">>, <<"data">> => <<>>}}};
         true ->
             PostInitT = erlang:timestamp(),
             Context = maps:get(context, Request, #{}),
@@ -51,7 +50,7 @@ preprocess(#{headers := Headers} = Request) ->
 %%%===================================================================
 is_authorized(undefined) ->
     false;
-is_authorized(<<"abc">>) ->
+is_authorized(<<"123456789">>) ->
     true;
 is_authorized(_) ->
     false.

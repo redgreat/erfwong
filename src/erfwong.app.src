@@ -10,13 +10,9 @@
     erf,
     goldrush,
     lager,
-    mysql,
     ncalendar,
     ndto,
-    njson,
-    rebar3_ex_doc,
-    erlfmt,
-    rebar3_ndto
+    njson
    ]},
   {env,[]},
   {modules, []},

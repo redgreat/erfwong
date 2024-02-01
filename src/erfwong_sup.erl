@@ -12,12 +12,11 @@
 %%% BEHAVIOURS
 -behaviour(supervisor).
 
--export([start_link/0]).
--export([init/1]).
-
 %%%===================================================================
 %%% API functions
 %%%===================================================================
+-export([start_link/0]).
+-export([init/1]).
 
 %%% @doc Starts the supervisor
 start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
@@ -33,33 +32,13 @@ start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 %% specifications.
 
 init([]) ->
-    % Users storage
-    ets:new(users, [public, named_table]),
-    UsersAPIConf = #{
-        name => userapi,
-        spec_path => <<"priv/apis/users.json">>,
-        callback => users_callback,
-        % preprocess_middlewares => [erfwong_preprocess],
-        % postprocess_middlewares => [erfwong_postprocess],
-        port => 8080,
-        swagger_ui => true,
-        log_level => debug
-    },
-    UsersChildSpec = {
-        user_api_server,
-        {erf, start_link, [UsersAPIConf]},
-        permanent,
-        5000,
-        worker,
-        [erf]
-    },
     LocationAPIConf = #{
         name => locationapi,
         spec_path => <<"priv/apis/tracker.json">>,
         static_routes => [{<<"/:Resource">>, {dir, <<"priv/static">>}}],
         callback => tracker_callback,
-        % preprocess_middlewares => [erfwong_preprocess],
-        % postprocess_middlewares => [erfwong_postprocess],
+        preprocess_middlewares => [erfwong_preprocess],
+        postprocess_middlewares => [erfwong_postprocess],
         port => 8081,
         swagger_ui => true,
         log_level => debug
@@ -72,7 +51,7 @@ init([]) ->
         worker,
         [erf]
     },
-    {ok, {{one_for_one, 5, 10}, [UsersChildSpec, LocationChildSpec]}}.
+    {ok, {{one_for_one, 5, 10}, [LocationChildSpec]}}.
 
 %%%===================================================================
 %%% Internal functions

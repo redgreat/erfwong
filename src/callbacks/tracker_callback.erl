@@ -9,10 +9,13 @@
 -module(tracker_callback).
 -author("wangcw").
 
-%% API
--export([get_location/4]).
+%%%===================================================================
+%%% API functions
+%%%===================================================================
+-export([get_location/1]).
 
-get_location(_PathParameters, QueryParameters, _Headers, _Body) ->
+%% @doc 定位信息获取
+get_location(#{query_parameters := QueryParameters} = _Request) ->
   IMEI = proplists:get_value(<<"imei">>, QueryParameters),
   StartDate = proplists:get_value(<<"startDate">>, QueryParameters),
   EndDate = proplists:get_value(<<"endDate">>, QueryParameters),
@@ -26,16 +29,15 @@ get_location(_PathParameters, QueryParameters, _Headers, _Body) ->
     {ok, Columns, Rows} ->
       ReturnMap = erfwong_utils:return_as_map(Columns, Rows),
       case ReturnMap of
-        _ when map_size(ReturnMap) > 0 ->
-        {200, [], ReturnMap};
+        _ when map_size(ReturnMap) > 0 -> {200, [], ReturnMap};
         #{ } ->
-          {404, [],#{
+          {404, [], #{
             <<"msg">> => <<"设备号：", IMEI, " 在时间段 ", StartDate, " 到 ", EndDate," 内无数据！">>,
             <<"data">> => <<>>
             }}
       end;
     {error, Reason} ->
       lager:error("SQL执行失败: ~p~n", [Reason]),
-      {500, [],#{<<"msg">> => <<"服务器内部错误！">>,
+      {500, [], #{<<"msg">> => <<"服务器内部错误！">>,
             <<"data">> => <<>>}}
   end.
