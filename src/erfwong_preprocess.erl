@@ -32,6 +32,7 @@
 %%--------------------------------------------------------------------
 preprocess(#{headers := Headers} = Request) ->
     Authorization = proplists:get_value(<<"x-api-key">>, Headers, undefined),
+    io:format("Authorization: ~p~n",[Authorization]),
     case is_authorized(Authorization) of
         false ->
             % For delete operations, if delete is disabled,
@@ -50,7 +51,7 @@ preprocess(#{headers := Headers} = Request) ->
 %%%===================================================================
 is_authorized(undefined) ->
     false;
-is_authorized(<<"123456789">>) ->
+is_authorized(<<"abc">>) ->
     true;
 is_authorized(_) ->
     false.
