@@ -2,55 +2,52 @@
 %%% @author wangcw
 %%% @copyright (C) 2024, REDGREAT
 %% @doc
-%%
-%% etracker public API
-%%
+%% 事前处理中间件
 %% @end
 %%% Created : 2024-01-08 17:09:52
 %%%-------------------------------------------------------------------
-
-%% @doc Behaviour for <code>erf</code>'s preprocessing middlewares.
 -module(erfwong_preprocess).
+-author("wangcw").
 
-%%% BEHAVIOURS
 -behaviour(erf_preprocess_middleware).
 
-%%% EXTERNAL EXPORTS
 -export([preprocess/1]).
 
 %%%===================================================================
 %%% API
 %%%===================================================================
 
-%%--------------------------------------------------------------------
-%% @private
 %% @doc
-%% Here we exemplify how information previously inserted on the request context
-%% can be used to condition the request processing flow.
-%%
+%% 事前处理函数.
+%% 如果请求路径是 /swagger开始的链接，并且方法为 GET，则不需要 x-api-key
 %% @end
-%%--------------------------------------------------------------------
-preprocess(#{headers := Headers} = Request) ->
-    Authorization = proplists:get_value(<<"x-api-key">>, Headers, undefined),
-    case is_authorized(Authorization) of
-        false ->
-            % For delete operations, if delete is disabled,
-            % we skip to the post-process middlewares.
-            {stop, {403, [], #{<<"msg">> => <<"鉴权失败！">>, <<"data">> => <<>>}}};
-        true ->
-            PostInitT = erlang:timestamp(),
-            Context = maps:get(context, Request, #{}),
-            % We store the current timestamp on the the request context
-            % for latter use.
-            Request#{context => Context#{post_init => PostInitT}}
+preprocess(#{method := Method, path := Path, headers := Headers} = Request) ->
+    case {hd(Path), Method} of
+        {<<"swagger">>, get} ->
+            Request#{context => maps:get(context, Request, #{})};
+        _ ->
+            Authorization = proplists:get_value(<<"x-api-key">>, Headers, undefined),
+            % io:format("Authorization: ~p~n", [Authorization]),
+            case is_authorized(Authorization) of
+                false ->
+                    {stop, {403, [], #{<<"msg">> => unicode:characters_to_binary("鉴权失败！"), <<"data">> => []}}};
+                true ->
+                    PostInitT = erlang:timestamp(),
+                    Context = maps:get(context, Request, #{}),
+                    Request#{context => Context#{post_init => PostInitT}}
+            end
     end.
 
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
+%% @private
+%% @doc
+%% API_KEY验证内部方法.
+%% @end
 is_authorized(undefined) ->
     false;
-is_authorized(<<"123456789">>) ->
+is_authorized(<<"5shvUSrJDZry9gJB3JTpSDvSTJXgcsQkBFjP">>) ->
     true;
 is_authorized(_) ->
     false.

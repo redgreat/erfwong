@@ -1,0 +1,13 @@
+%% -*- mode: erlang;erlang-indent-level: 4;indent-tabs-mode: nil -*-
+
+
+✅ 解决中文返回乱码问题
+❎ 解决JOSN排序问题
+❎ 时间转换函数使用nclander内置库
+✅ 中文备注添加、文档生成
+✅ Swagger取消鉴权
+✅ SQL执行添加try cach
+-> 数据库更换为Mnesia
+❓ 数据库添加Oracle支持
+-> 打包docker镜像 （s6守护）
+-> github自动发布流程配置

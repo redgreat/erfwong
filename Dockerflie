@@ -1,0 +1,16 @@
+FROM erlang:26-alpine
+
+ENV SHELL="/bin/sh"
+
+WORKDIR /opt/erfwong
+
+COPY docker/docker-entrypoint.sh /opt/erfwong-docker/docker-entrypoint.sh
+
+VOLUME /opt/erfwong
+
+EXPOSE 8080 8443
+
+# Use dumb-init to reap zombies, catch signals, and all the other stuff pid 1 should do.
+ENTRYPOINT ["/usr/bin/dumb-init", "-c", "--", "/opt/erfwong-docker/docker-entrypoint.sh"]
+
+CMD ["/bin/bash"]

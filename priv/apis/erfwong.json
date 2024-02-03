@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "轨迹回放 REST API",
+    "title": "日常数据提供 Restful API.",
     "version": "1.0.0",
-    "description": "个人轨迹查询.",
+    "description": "日常数据提供，erlang后台实现，mysql数据库，使用app_key认证。",
     "contact": {
-      "name": "API Support",
+      "name": "联系方式",
       "url": "https://www.wongcw.cn",
       "email": "rubygreat@msn.com"
     },
@@ -16,7 +16,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8081",
+      "url": "http://localhost:8080",
       "description": "本地测试服务器"
     }
   ],
@@ -76,6 +76,9 @@
       }
     }
   },
+  "security": [ {
+    "api_key": []
+  } ],
   "components": {
     "parameters": {
       "imei": {
@@ -199,7 +202,7 @@
     "securitySchemes": {
       "api_key": {
         "type": "apiKey",
-        "name": "api_key",
+        "name": "x-api-key",
         "in": "header",
         "description": "API_KEY"
       }

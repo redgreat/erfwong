@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+    zotonic:
+        image: redgreat/erfwong
+        environment:
+            ERFWONG_PORT: 8080
+            ERFWONG_SSL_PORT: 8443
+            ERFWONG_APPS: /opt/erfwong
+        volumes:
+            - ./:/opt/erfwong
+        ports:
+            - "8080:8080"
+            - "8443:8443"
+
