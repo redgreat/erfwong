@@ -1,3 +1,4 @@
+%% coding: unicode
 %%%-------------------------------------------------------------------
 %%% @author wangcw
 %%% @copyright (C) 2024, REDGREAT
@@ -12,8 +13,9 @@
 
 -behaviour(application).
 
--export([start/2, stop/1]).
+-include_lib("api_key.hrl").
 
+-export([start/2, stop/1]).
 %%%===================================================================
 %%% Application callbacks
 %%%===================================================================
@@ -24,8 +26,10 @@
 start(_StartType, _StartArgs) ->
     application:start(lager),
     mysql_pool:start(),
-    erfwong_sup:start_link(),
-    {ok, self()}.
+    ets:new(?API_KEY, [named_table, public, set]),
+    {ok, ApiKey} = application:get_env(api_cfg, api_key),
+    ets:insert(?API_KEY, {ApiKey, true}),
+    erfwong_sup:start_link().
 
 %% @doc
 %% 关闭app

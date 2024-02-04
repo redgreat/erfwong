@@ -19,8 +19,9 @@
 %%% API functions
 %%%===================================================================
 
-%% @private
-%% @doc mysql-otp result to map.
+%% @doc
+%% mysql-otp result to map.
+%% @end
 as_map({ok, ColumnNames, Rows}) ->
     as_map(ColumnNames, Rows, []).
 
@@ -37,8 +38,9 @@ as_map(ColumnNames, [Row | RestRows], Acc) ->
 as_map(_ColumnNames, [], Acc) ->
     lists:reverse(Acc).
 
-%% @private
-%% @doc mysql-otp result to map for http return, add ReturnStatus.
+%% @doc
+%% mysql-otp result to map for http return, add ReturnStatus.
+%% @end
 return_as_map({ok, Columns, Rows}) ->
     return_as_map(Columns, Rows).
 
@@ -55,7 +57,7 @@ return_as_map(Columns, Rows) ->
 %%%===================================================================
 
 %% @private
-%% @doc Time convertor, ISO.
+%% @doc Time convertor, ISO8601.
 transform_value(_, {{Y, M, D}, {H, Mi, S}}) when
     is_integer(Y), is_integer(M), is_integer(D), is_integer(H), is_integer(Mi), is_integer(S)
 ->

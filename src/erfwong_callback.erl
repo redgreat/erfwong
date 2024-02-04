@@ -30,7 +30,7 @@ get_location(#{query_parameters := QueryParameters} = _Request) ->
             "           WHERE device_id = ?\n"
             "             AND dev_upload >= ?\n"
             "             AND dev_upload < ?\n"
-            "           LIMIT 10;",
+            "           LIMIT 5000;",
             [IMEI, StartDate, EndDate]
         ),
         ReturnMap = erfwong_utils:return_as_map(Columns, Rows),
@@ -40,8 +40,9 @@ get_location(#{query_parameters := QueryParameters} = _Request) ->
                 Msg2 = unicode:characters_to_binary("',在时间段'"),
                 Msg3 = unicode:characters_to_binary("'到'"),
                 Msg4 = unicode:characters_to_binary("'内无数据！"),
-                Msg = <<Msg1/binary, IMEI/binary, Msg2/binary, StartDate/binary,
-                        Msg3/binary, EndDate/binary, Msg4/binary>>,
+                Msg =
+                    <<Msg1/binary, IMEI/binary, Msg2/binary, StartDate/binary, Msg3/binary,
+                        EndDate/binary, Msg4/binary>>,
                 {404, [], #{
                     <<"msg">> => Msg,
                     <<"data">> => undefined

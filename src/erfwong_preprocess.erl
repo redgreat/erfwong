@@ -1,3 +1,4 @@
+%% coding: unicode
 %%%-------------------------------------------------------------------
 %%% @author wangcw
 %%% @copyright (C) 2024, REDGREAT
@@ -11,8 +12,9 @@
 
 -behaviour(erf_preprocess_middleware).
 
--export([preprocess/1]).
+-include_lib("api_key.hrl").
 
+-export([preprocess/1]).
 %%%===================================================================
 %%% API
 %%%===================================================================
@@ -27,10 +29,12 @@ preprocess(#{method := Method, path := Path, headers := Headers} = Request) ->
             Request#{context => maps:get(context, Request, #{})};
         _ ->
             Authorization = proplists:get_value(<<"x-api-key">>, Headers, undefined),
-            % io:format("Authorization: ~p~n", [Authorization]),
             case is_authorized(Authorization) of
                 false ->
-                    {stop, {403, [], #{<<"msg">> => unicode:characters_to_binary("鉴权失败！"), <<"data">> => []}}};
+                    {stop,
+                        {403, [], #{
+                            <<"msg">> => unicode:characters_to_binary("鉴权失败！"), <<"data">> => []
+                        }}};
                 true ->
                     PostInitT = erlang:timestamp(),
                     Context = maps:get(context, Request, #{}),
@@ -47,7 +51,10 @@ preprocess(#{method := Method, path := Path, headers := Headers} = Request) ->
 %% @end
 is_authorized(undefined) ->
     false;
-is_authorized(<<"5shvUSrJDZry9gJB3JTpSDvSTJXgcsQkBFjP">>) ->
-    true;
-is_authorized(_) ->
-    false.
+is_authorized(ApiKey) ->
+    case ets:lookup(?API_KEY, ApiKey) of
+        [{_, true}] ->
+            true;
+        _ ->
+            false
+    end.
