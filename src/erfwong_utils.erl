@@ -60,7 +60,7 @@ return_as_map(Columns, Rows) ->
 %% @doc Time convertor, ISO8601.
 transform_value(_, {{Y, M, D}, {H, Mi, S}}) when
     is_integer(Y), is_integer(M), is_integer(D), is_integer(H), is_integer(Mi), is_integer(S)
-->
+    ->
     TimeStr = io_lib:fwrite("~4.10.0B-~2.10.0B-~2.10.0BT~2.10.0B:~2.10.0B:~2.10.0BZ", [
         Y, M, D, H, Mi, S
     ]),

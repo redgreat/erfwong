@@ -1,22 +1,18 @@
-%% -*- mode: erlang;erlang-indent-level: 4;indent-tabs-mode: nil -*-
 {application, erfwong,
- [{description, "日常数据提供API"},
-  {vsn, "0.1.0"},
-  {registered, []},
-  {mod, {erfwong_app, []}},
-  {applications,
-   [kernel,
-    stdlib,
-    erf,
-    lager,
-    ncalendar,
-    ndto,
-    njson
-   ]},
-  {env,[]},
-  {modules, []},
-
-  {licenses, ["Apache-2.0"]},
-  {links,[{"Github",
-           "https://github.com/redgreat/erfwong"}]}
- ]}.
+    [{description, "日常数据提供API"},
+        {vsn, "0.1.0"},
+        {registered, []},
+        {mod, {erfwong_app, []}},
+        {applications,
+            [kernel,
+                stdlib,
+                erf,
+                lager
+            ]},
+        {env, []},
+        {modules, []},
+        {maintainers, [wangcw]},
+        {licenses, ["Apache-2.0"]},
+        {links, [{"Github",
+            "https://github.com/redgreat/erfwong"}]}
+    ]}.

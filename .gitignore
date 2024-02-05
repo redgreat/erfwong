@@ -17,7 +17,8 @@ deps
 .rebar3
 _build/
 _checkouts/
-config/
+config/sys.config
+config/vm.args
 logs
 rebar.lock
 rebar3.crashdump

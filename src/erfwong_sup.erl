@@ -32,8 +32,10 @@ start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 %% @end
 
 init([]) ->
-    {ok, ApiPort} = application:get_env(api_cfg, port),
-    ErfWongAPIConf = #{
+    case application:get_env(api_cfg, api_port) of
+    {ok, ApiPort} ->
+        lager:info("应用启动端口号： ~p~n", [ApiPort]),
+        ErfWongAPIConf = #{
         name => erfwong_api,
         spec_path => <<"priv/apis/erfwong.json">>,
         static_routes => [{<<"/:Resource">>, {dir, <<"priv/static">>}}],
@@ -43,16 +45,19 @@ init([]) ->
         port => ApiPort,
         swagger_ui => true,
         log_level => error
-    },
-    ErfWongChildSpec = {
-        api_server,
-        {erf, start_link, [ErfWongAPIConf]},
-        permanent,
-        5000,
-        worker,
-        [erf]
-    },
-    {ok, {{one_for_one, 5, 10}, [ErfWongChildSpec]}}.
+        },
+        ErfWongChildSpec = {
+            api_server,
+            {erf, start_link, [ErfWongAPIConf]},
+            permanent,
+            5000,
+            worker,
+            [erf]
+        },
+        {ok, {{one_for_one, 5, 10}, [ErfWongChildSpec]}};
+    undefined ->
+        lager:error("未在配置文件中找到端口号配置！")
+    end.
 
 %%%===================================================================
 %%% Internal functions

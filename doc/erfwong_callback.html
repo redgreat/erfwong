@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,192 +8,199 @@
     <meta name="project" content="erfwong v0.1.0">
 
     <title>erfwong_callback — erfwong v0.1.0</title>
-    <link rel="stylesheet" href="dist/html-erlang-BDSMJ657.css" />
+    <link rel="stylesheet" href="dist/html-erlang-BDSMJ657.css"/>
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
     <script src="dist/sidebar_items-94F3826A.js"></script>
 
-      <script src="docs_config.js"></script>
+    <script src="docs_config.js"></script>
 
     <script async src="dist/html-J2ASZTQE.js"></script>
 
 
-  </head>
-  <body data-type="modules" class="page-module">
-    <script>
+</head>
+<body data-type="modules" class="page-module">
+<script>
 
-      try {
+    try {
         var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
 
         if (settings.theme === 'dark' ||
-           ((settings.theme === 'system' || settings.theme == null) &&
-             window.matchMedia('(prefers-color-scheme: dark)').matches)
-           ) {
-          document.body.classList.add('dark')
+            ((settings.theme === 'system' || settings.theme == null) &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+            document.body.classList.add('dark')
         }
-      } catch (error) { }
-    </script>
+    } catch (error) {
+    }
+</script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
-  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
-</button>
-
-<nav id="sidebar" class="sidebar">
-  <form class="sidebar-search" action="search.html">
-    <label class="search-label">
-      <span class="sr-only">Search documentation of erfwong</span>
-      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
-    <button type="submit" class="search-button" aria-label="Submit Search">
-      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+        <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
-      <i class="ri-close-line ri-lg" title="Cancel search"></i>
-    </button>
-  </form>
 
-  <div class="autocomplete">
-    <div class="autocomplete-results">
-    </div>
-  </div>
+    <nav id="sidebar" class="sidebar">
+        <form class="sidebar-search" action="search.html">
+            <label class="search-label">
+                <span class="sr-only">Search documentation of erfwong</span>
+                <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off"
+                       autocorrect="off" autocapitalize="off" spellcheck="false"/>
+            </label>
+            <button type="submit" class="search-button" aria-label="Submit Search">
+                <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+            </button>
+            <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+            </button>
+        </form>
 
-  <div class="sidebar-header">
+        <div class="autocomplete">
+            <div class="autocomplete-results">
+            </div>
+        </div>
 
-      <a href="https://www.wongcw.cn">
-        <img src="assets/logo.png" alt="erfwong" class="sidebar-projectImage">
-      </a>
+        <div class="sidebar-header">
 
-    <div class="sidebar-projectDetails">
-      <a href="https://www.wongcw.cn" class="sidebar-projectName" translate="no">
-erfwong
-      </a>
-      <div class="sidebar-projectVersion" translate="no">
-        v0.1.0
-      </div>
-    </div>
-    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
-      <li>
-        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
-Pages
-        </button>
-      </li>
+            <a href="https://www.wongcw.cn">
+                <img src="assets/logo.png" alt="erfwong" class="sidebar-projectImage">
+            </a>
 
-        <li>
-          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
-            Modules
-          </button>
-        </li>
+            <div class="sidebar-projectDetails">
+                <a href="https://www.wongcw.cn" class="sidebar-projectName" translate="no">
+                    erfwong
+                </a>
+                <div class="sidebar-projectVersion" translate="no">
+                    v0.1.0
+                </div>
+            </div>
+            <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+                <li>
+                    <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel"
+                            aria-selected="true" tabindex="0">
+                        Pages
+                    </button>
+                </li>
 
-
-    </ul>
-  </div>
-
-  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
-    <ul id="extras-full-list" class="full-list"></ul>
-  </div>
-
-    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
-      <ul id="modules-full-list" class="full-list"></ul>
-    </div>
-
-
-</nav>
-
-<main class="content">
-  <output role="status" id="toast"></output>
-  <div class="content-outer">
-    <div id="content" class="content-inner">
-
-<h1>
-<button class="icon-action display-settings">
-  <i class="ri-settings-3-line"></i>
-  <span class="sr-only">Settings</span>
-</button>
+                <li>
+                    <button id="modules-list-tab-button" role="tab" data-type="modules"
+                            aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+                        Modules
+                    </button>
+                </li>
 
 
-    <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_callback.erl#L10" title="View Source" class="icon-action" rel="help">
-      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-      <span class="sr-only">View Source</span>
-    </a>
+            </ul>
+        </div>
 
-  <span translate="no">erfwong_callback</span> 
-  <small class="app-vsn" translate="no">(erfwong v0.1.0)</small>
+        <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+            <ul id="extras-full-list" class="full-list"></ul>
+        </div>
 
-</h1>
-
-
-  <section id="moduledoc">
-日常数据提供API 回调模块
-  </section>
+        <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button"
+             hidden>
+            <ul id="modules-full-list" class="full-list"></ul>
+        </div>
 
 
-  <section id="summary" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#summary">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Summary</span>
-    </h1>
-<div class="summary-functions summary">
-  <h2>
-    <a href="#functions">Functions</a>
-  </h2>
+    </nav>
 
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#get_location/1" translate="no">get_location(Request)</a>
+    <main class="content">
+        <output role="status" id="toast"></output>
+        <div class="content-outer">
+            <div id="content" class="content-inner">
 
-      </div>
-
-        <div class="summary-synopsis">定位信息获取</div>
-
-    </div>
-
-</div>
-
-  </section>
+                <h1>
+                    <button class="icon-action display-settings">
+                        <i class="ri-settings-3-line"></i>
+                        <span class="sr-only">Settings</span>
+                    </button>
 
 
-  <section id="functions" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#functions">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Functions</span>
-    </h1>
-    <div class="functions-list">
-<section class="detail" id="get_location/1">
+                    <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_callback.erl#L10"
+                       title="View Source" class="icon-action" rel="help">
+                        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                        <span class="sr-only">View Source</span>
+                    </a>
 
-  <div class="detail-header">
-    <a href="#get_location/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get_location(Request)</h1>
+                    <span translate="no">erfwong_callback</span>
+                    <small class="app-vsn" translate="no">(erfwong v0.1.0)</small>
 
-      <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_callback.erl#L21" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
+                </h1>
 
 
-  </div>
+                <section id="moduledoc">
+                    日常数据提供API 回调模块
+                </section>
 
-  <section class="docstring">
 
-定位信息获取
-  </section>
-</section>
+                <section id="summary" class="details-list">
+                    <h1 class="section-heading">
+                        <a class="hover-link" href="#summary">
+                            <i class="ri-link-m" aria-hidden="true"></i>
+                        </a>
+                        <span class="text">Summary</span>
+                    </h1>
+                    <div class="summary-functions summary">
+                        <h2>
+                            <a href="#functions">Functions</a>
+                        </h2>
 
-    </div>
-  </section>
+                        <div class="summary-row">
+                            <div class="summary-signature">
+                                <a href="#get_location/1" translate="no">get_location(Request)</a>
 
-      <footer class="footer">
-        <p>
+                            </div>
+
+                            <div class="summary-synopsis">定位信息获取</div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section id="functions" class="details-list">
+                    <h1 class="section-heading">
+                        <a class="hover-link" href="#functions">
+                            <i class="ri-link-m" aria-hidden="true"></i>
+                        </a>
+                        <span class="text">Functions</span>
+                    </h1>
+                    <div class="functions-list">
+                        <section class="detail" id="get_location/1">
+
+                            <div class="detail-header">
+                                <a href="#get_location/1" class="detail-link" title="Link to this function">
+                                    <i class="ri-link-m" aria-hidden="true"></i>
+                                    <span class="sr-only">Link to this function</span>
+                                </a>
+                                <h1 class="signature" translate="no">get_location(Request)</h1>
+
+                                <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_callback.erl#L21"
+                                   class="icon-action" rel="help" title="View Source">
+                                    <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                                    <span class="sr-only">View Source</span>
+                                </a>
+
+
+                            </div>
+
+                            <section class="docstring">
+
+                                定位信息获取
+                            </section>
+                        </section>
+
+                    </div>
+                </section>
+
+                <footer class="footer">
+                    <p>
 
             <span class="line">
               <a href="https://hex.pm/packages/erfwong/0.1.0" class="footer-hex-package">Hex Package</a>
@@ -204,7 +211,7 @@ Pages
 
             </span>
 
-          <span class="line">
+                        <span class="line">
             <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
               Search HexDocs
             </button>
@@ -214,21 +221,23 @@ Pages
               </a>
 
           </span>
-        </p>
+                    </p>
 
-        <p class="built-using">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.7) for the
+                    <p class="built-using">
+                        Built using
+                        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank"
+                           rel="help noopener" translate="no">ExDoc</a> (v0.30.7) for the
 
-            <a href="https://erlang.org" title="Erlang" target="_blank" translate="no">Erlang programming language</a>
+                        <a href="https://erlang.org" title="Erlang" target="_blank" translate="no">Erlang programming
+                            language</a>
 
-        </p>
-      </footer>
-    </div>
-  </div>
-</main>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </main>
 </div>
 
 
-  </body>
+</body>
 </html>

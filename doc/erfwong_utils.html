@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,284 +8,295 @@
     <meta name="project" content="erfwong v0.1.0">
 
     <title>erfwong_utils — erfwong v0.1.0</title>
-    <link rel="stylesheet" href="dist/html-erlang-BDSMJ657.css" />
+    <link rel="stylesheet" href="dist/html-erlang-BDSMJ657.css"/>
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
     <script src="dist/sidebar_items-94F3826A.js"></script>
 
-      <script src="docs_config.js"></script>
+    <script src="docs_config.js"></script>
 
     <script async src="dist/html-J2ASZTQE.js"></script>
 
 
-  </head>
-  <body data-type="modules" class="page-module">
-    <script>
+</head>
+<body data-type="modules" class="page-module">
+<script>
 
-      try {
+    try {
         var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
 
         if (settings.theme === 'dark' ||
-           ((settings.theme === 'system' || settings.theme == null) &&
-             window.matchMedia('(prefers-color-scheme: dark)').matches)
-           ) {
-          document.body.classList.add('dark')
+            ((settings.theme === 'system' || settings.theme == null) &&
+                window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+            document.body.classList.add('dark')
         }
-      } catch (error) { }
-    </script>
+    } catch (error) {
+    }
+</script>
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
-  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
-</button>
-
-<nav id="sidebar" class="sidebar">
-  <form class="sidebar-search" action="search.html">
-    <label class="search-label">
-      <span class="sr-only">Search documentation of erfwong</span>
-      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
-    <button type="submit" class="search-button" aria-label="Submit Search">
-      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+        <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
-      <i class="ri-close-line ri-lg" title="Cancel search"></i>
-    </button>
-  </form>
 
-  <div class="autocomplete">
-    <div class="autocomplete-results">
-    </div>
-  </div>
+    <nav id="sidebar" class="sidebar">
+        <form class="sidebar-search" action="search.html">
+            <label class="search-label">
+                <span class="sr-only">Search documentation of erfwong</span>
+                <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off"
+                       autocorrect="off" autocapitalize="off" spellcheck="false"/>
+            </label>
+            <button type="submit" class="search-button" aria-label="Submit Search">
+                <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+            </button>
+            <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+            </button>
+        </form>
+
+        <div class="autocomplete">
+            <div class="autocomplete-results">
+            </div>
+        </div>
+
+        <div class="sidebar-header">
+
+            <a href="https://www.wongcw.cn">
+                <img src="assets/logo.png" alt="erfwong" class="sidebar-projectImage">
+            </a>
+
+            <div class="sidebar-projectDetails">
+                <a href="https://www.wongcw.cn" class="sidebar-projectName" translate="no">
+                    erfwong
+                </a>
+                <div class="sidebar-projectVersion" translate="no">
+                    v0.1.0
+                </div>
+            </div>
+            <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+                <li>
+                    <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel"
+                            aria-selected="true" tabindex="0">
+                        Pages
+                    </button>
+                </li>
 
-  <div class="sidebar-header">
+                <li>
+                    <button id="modules-list-tab-button" role="tab" data-type="modules"
+                            aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+                        Modules
+                    </button>
+                </li>
 
-      <a href="https://www.wongcw.cn">
-        <img src="assets/logo.png" alt="erfwong" class="sidebar-projectImage">
-      </a>
 
-    <div class="sidebar-projectDetails">
-      <a href="https://www.wongcw.cn" class="sidebar-projectName" translate="no">
-erfwong
-      </a>
-      <div class="sidebar-projectVersion" translate="no">
-        v0.1.0
-      </div>
-    </div>
-    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
-      <li>
-        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
-Pages
-        </button>
-      </li>
+            </ul>
+        </div>
 
-        <li>
-          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
-            Modules
-          </button>
-        </li>
+        <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+            <ul id="extras-full-list" class="full-list"></ul>
+        </div>
 
+        <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button"
+             hidden>
+            <ul id="modules-full-list" class="full-list"></ul>
+        </div>
 
-    </ul>
-  </div>
 
-  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
-    <ul id="extras-full-list" class="full-list"></ul>
-  </div>
+    </nav>
+
+    <main class="content">
+        <output role="status" id="toast"></output>
+        <div class="content-outer">
+            <div id="content" class="content-inner">
+
+                <h1>
+                    <button class="icon-action display-settings">
+                        <i class="ri-settings-3-line"></i>
+                        <span class="sr-only">Settings</span>
+                    </button>
 
-    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
-      <ul id="modules-full-list" class="full-list"></ul>
-    </div>
 
+                    <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L9"
+                       title="View Source" class="icon-action" rel="help">
+                        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                        <span class="sr-only">View Source</span>
+                    </a>
 
-</nav>
+                    <span translate="no">erfwong_utils</span>
+                    <small class="app-vsn" translate="no">(erfwong v0.1.0)</small>
 
-<main class="content">
-  <output role="status" id="toast"></output>
-  <div class="content-outer">
-    <div id="content" class="content-inner">
+                </h1>
 
-<h1>
-<button class="icon-action display-settings">
-  <i class="ri-settings-3-line"></i>
-  <span class="sr-only">Settings</span>
-</button>
 
+                <section id="moduledoc">
+                    convert json format tools and so on.
+                </section>
+
+
+                <section id="summary" class="details-list">
+                    <h1 class="section-heading">
+                        <a class="hover-link" href="#summary">
+                            <i class="ri-link-m" aria-hidden="true"></i>
+                        </a>
+                        <span class="text">Summary</span>
+                    </h1>
+                    <div class="summary-functions summary">
+                        <h2>
+                            <a href="#functions">Functions</a>
+                        </h2>
 
-    <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L9" title="View Source" class="icon-action" rel="help">
-      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-      <span class="sr-only">View Source</span>
-    </a>
+                        <div class="summary-row">
+                            <div class="summary-signature">
+                                <a href="#as_map/1" translate="no">as_map(_)</a>
 
-  <span translate="no">erfwong_utils</span> 
-  <small class="app-vsn" translate="no">(erfwong v0.1.0)</small>
+                            </div>
 
-</h1>
+                            <div class="summary-synopsis">mysql-otp result to map.</div>
 
+                        </div>
 
-  <section id="moduledoc">
-convert json format tools and so on.
-  </section>
+                        <div class="summary-row">
+                            <div class="summary-signature">
+                                <a href="#as_map/3" translate="no">as_map(ColumnNames, RestRows, Acc)</a>
 
+                            </div>
 
-  <section id="summary" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#summary">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Summary</span>
-    </h1>
-<div class="summary-functions summary">
-  <h2>
-    <a href="#functions">Functions</a>
-  </h2>
+                        </div>
 
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#as_map/1" translate="no">as_map(_)</a>
+                        <div class="summary-row">
+                            <div class="summary-signature">
+                                <a href="#return_as_map/1" translate="no">return_as_map(_)</a>
 
-      </div>
+                            </div>
 
-        <div class="summary-synopsis">mysql-otp result to map.</div>
+                            <div class="summary-synopsis">mysql-otp result to map for http return, add ReturnStatus.
+                            </div>
 
-    </div>
+                        </div>
 
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#as_map/3" translate="no">as_map(ColumnNames, RestRows, Acc)</a>
+                        <div class="summary-row">
+                            <div class="summary-signature">
+                                <a href="#return_as_map/2" translate="no">return_as_map(Columns, Rows)</a>
 
-      </div>
+                            </div>
 
-    </div>
+                        </div>
 
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#return_as_map/1" translate="no">return_as_map(_)</a>
+                    </div>
 
-      </div>
+                </section>
 
-        <div class="summary-synopsis">mysql-otp result to map for http return, add ReturnStatus.</div>
 
-    </div>
+                <section id="functions" class="details-list">
+                    <h1 class="section-heading">
+                        <a class="hover-link" href="#functions">
+                            <i class="ri-link-m" aria-hidden="true"></i>
+                        </a>
+                        <span class="text">Functions</span>
+                    </h1>
+                    <div class="functions-list">
+                        <section class="detail" id="as_map/1">
 
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#return_as_map/2" translate="no">return_as_map(Columns, Rows)</a>
+                            <div class="detail-header">
+                                <a href="#as_map/1" class="detail-link" title="Link to this function">
+                                    <i class="ri-link-m" aria-hidden="true"></i>
+                                    <span class="sr-only">Link to this function</span>
+                                </a>
+                                <h1 class="signature" translate="no">as_map(_)</h1>
 
-      </div>
+                                <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L25"
+                                   class="icon-action" rel="help" title="View Source">
+                                    <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                                    <span class="sr-only">View Source</span>
+                                </a>
 
-    </div>
 
-</div>
+                            </div>
 
-  </section>
+                            <section class="docstring">
 
+                                mysql-otp result to map.
+                            </section>
+                        </section>
+                        <section class="detail" id="as_map/3">
 
-  <section id="functions" class="details-list">
-    <h1 class="section-heading">
-      <a class="hover-link" href="#functions">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Functions</span>
-    </h1>
-    <div class="functions-list">
-<section class="detail" id="as_map/1">
+                            <div class="detail-header">
+                                <a href="#as_map/3" class="detail-link" title="Link to this function">
+                                    <i class="ri-link-m" aria-hidden="true"></i>
+                                    <span class="sr-only">Link to this function</span>
+                                </a>
+                                <h1 class="signature" translate="no">as_map(ColumnNames, RestRows, Acc)</h1>
 
-  <div class="detail-header">
-    <a href="#as_map/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">as_map(_)</h1>
+                                <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L28"
+                                   class="icon-action" rel="help" title="View Source">
+                                    <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                                    <span class="sr-only">View Source</span>
+                                </a>
 
-      <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L25" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
 
+                            </div>
 
-  </div>
+                            <section class="docstring">
 
-  <section class="docstring">
 
-mysql-otp result to map.
-  </section>
-</section>
-<section class="detail" id="as_map/3">
+                            </section>
+                        </section>
+                        <section class="detail" id="return_as_map/1">
 
-  <div class="detail-header">
-    <a href="#as_map/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">as_map(ColumnNames, RestRows, Acc)</h1>
+                            <div class="detail-header">
+                                <a href="#return_as_map/1" class="detail-link" title="Link to this function">
+                                    <i class="ri-link-m" aria-hidden="true"></i>
+                                    <span class="sr-only">Link to this function</span>
+                                </a>
+                                <h1 class="signature" translate="no">return_as_map(_)</h1>
 
-      <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L28" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
+                                <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L44"
+                                   class="icon-action" rel="help" title="View Source">
+                                    <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                                    <span class="sr-only">View Source</span>
+                                </a>
 
 
-  </div>
+                            </div>
 
-  <section class="docstring">
+                            <section class="docstring">
 
+                                mysql-otp result to map for http return, add ReturnStatus.
+                            </section>
+                        </section>
+                        <section class="detail" id="return_as_map/2">
 
-  </section>
-</section>
-<section class="detail" id="return_as_map/1">
+                            <div class="detail-header">
+                                <a href="#return_as_map/2" class="detail-link" title="Link to this function">
+                                    <i class="ri-link-m" aria-hidden="true"></i>
+                                    <span class="sr-only">Link to this function</span>
+                                </a>
+                                <h1 class="signature" translate="no">return_as_map(Columns, Rows)</h1>
 
-  <div class="detail-header">
-    <a href="#return_as_map/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">return_as_map(_)</h1>
+                                <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L47"
+                                   class="icon-action" rel="help" title="View Source">
+                                    <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+                                    <span class="sr-only">View Source</span>
+                                </a>
 
-      <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L44" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
 
+                            </div>
 
-  </div>
+                            <section class="docstring">
 
-  <section class="docstring">
 
-mysql-otp result to map for http return, add ReturnStatus.
-  </section>
-</section>
-<section class="detail" id="return_as_map/2">
+                            </section>
+                        </section>
 
-  <div class="detail-header">
-    <a href="#return_as_map/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">return_as_map(Columns, Rows)</h1>
+                    </div>
+                </section>
 
-      <a href="https://github.com/redgreat/erfwong/blob/v0.1.0/src/erfwong_utils.erl#L47" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
-
-      <footer class="footer">
-        <p>
+                <footer class="footer">
+                    <p>
 
             <span class="line">
               <a href="https://hex.pm/packages/erfwong/0.1.0" class="footer-hex-package">Hex Package</a>
@@ -296,7 +307,7 @@ mysql-otp result to map for http return, add ReturnStatus.
 
             </span>
 
-          <span class="line">
+                        <span class="line">
             <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
               Search HexDocs
             </button>
@@ -306,21 +317,23 @@ mysql-otp result to map for http return, add ReturnStatus.
               </a>
 
           </span>
-        </p>
+                    </p>
 
-        <p class="built-using">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.7) for the
+                    <p class="built-using">
+                        Built using
+                        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank"
+                           rel="help noopener" translate="no">ExDoc</a> (v0.30.7) for the
 
-            <a href="https://erlang.org" title="Erlang" target="_blank" translate="no">Erlang programming language</a>
+                        <a href="https://erlang.org" title="Erlang" target="_blank" translate="no">Erlang programming
+                            language</a>
 
-        </p>
-      </footer>
-    </div>
-  </div>
-</main>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </main>
 </div>
 
 
-  </body>
+</body>
 </html>
