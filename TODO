@@ -7,5 +7,6 @@
 ✅ Swagger取消鉴权
 ✅ SQL执行添加try cach
 ✅ github page
+✅ rebar3 release/rebar3 as prod tar
 -> 打包docker镜像 （s6守护）
 -> github自动发布流程配置
