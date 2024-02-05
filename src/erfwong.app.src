@@ -5,9 +5,10 @@
         {mod, {erfwong_app, []}},
         {applications,
             [kernel,
-                stdlib,
-                erf,
-                lager
+             stdlib,
+             erf,
+             lager,
+             mysql_pool
             ]},
         {env, []},
         {modules, []},

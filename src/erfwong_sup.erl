@@ -32,7 +32,7 @@ start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 %% @end
 
 init([]) ->
-    case application:get_env(api_cfg, api_port) of
+    case application:get_env(erfwong, api_port) of
     {ok, ApiPort} ->
         lager:info("应用启动端口号： ~p~n", [ApiPort]),
         ErfWongAPIConf = #{

@@ -26,23 +26,16 @@
 start(_StartType, _StartArgs) ->
     application:start(lager),
     mysql_pool:start(),
-    % case application:get_env(api_cfg, api_key) of
-    % {ok, ApiKey} ->
-    %     io:format("~p~n", [ApiKey]),
-    %     ets:insert(?API_KEY, {ApiKey, true});
-    % undefined ->
-    %     lager:error("未在配置文件中找到 API_KEY！")
-    % end,
-    erfwong_sup:start_link(),
     try
-        {ok, ApiKey} = application:get_env(api_cfg, api_key),
+        {ok, ApiKey} = application:get_env(erfwong, api_key),
         ets:new(?API_KEY, [named_table, public, set]),
         ets:insert(?API_KEY, {ApiKey, true}),
         lager:info("API_KEY参数获取成功!")
     catch
         error:Error ->
         lager:error("配置文件中获取API_KEY参数获取失败： ~p~n", [Error])
-    end.
+    end,
+    erfwong_sup:start_link().
 
 %% @doc
 %% 关闭app
