@@ -1,13 +1,13 @@
 name: 发版
 
 on:
-  push:
-    branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
   # pull_request:
   #   branches: [ "main" ]
-  # push:
-  #   tags:
-  #     - 'release*'
+  push:
+    tags:
+      - 'release*'
 
 jobs:
   build:

@@ -9,7 +9,15 @@ jobs:
     runs-on: ubuntu-latest # 使用最新版本的Ubuntu运行器
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        run: | 
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy/id_rsa
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > deploy/id_rsa.pub
+          
+      - uses: actions/download-artifact@v3
+        with:
+          name: ssh-keys
+          path: deploy
 
       # 设置Docker构建环境
       - name: Set up Docker Buildx
@@ -42,6 +50,6 @@ jobs:
           context: .
           push: true
           tags: redgreat/erfwong:latest
-          build-args: |
-            SSH_KEY=${{ secrets.SSH_PRIVATE_KEY }}
-            PUB_KEY=${{ secrets.SSH_PUBLIC_KEY }}
+          secrets: |
+            SSH_PRIVATE_KEY
+            SSH_PUBLIC_KEY
