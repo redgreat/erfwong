@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Prepare SSH key
+      - name: Build and release
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
@@ -28,10 +28,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - uses: actions/checkout@v3
-      - name: Build and release
-        run: |
+          
           rebar3 as prod release
           tar -czvf erfwong-${{ github.ref_name }}.tar.gz _build/default/rel/erfwong-${{ github.ref_name }}
 
