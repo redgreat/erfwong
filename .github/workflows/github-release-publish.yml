@@ -1,4 +1,4 @@
-name: Release Erlang Project
+name: 发版
 
 on:
   push:

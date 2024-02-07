@@ -11,12 +11,10 @@ WORKDIR /erfwong
 
 RUN apk add --no-cache git openssh-client
 
-# 创建 SSH 目录并添加私钥
 RUN mkdir -p /root/.ssh \
-    && echo "SSH_KEY" > /root/.ssh/id_rsa \
+    && echo "$SSH_KEY" > /root/.ssh/id_rsa \
     && chmod 600 /root/.ssh/id_rsa
 
-# 添加 GitHub 的已知主机
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN rebar3 as prod release
