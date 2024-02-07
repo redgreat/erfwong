@@ -32,7 +32,6 @@ jobs:
           chmod 600 "$HOME/.ssh/id_rsa"
           eval "$(ssh-agent -s)"
           ssh-add "$HOME/.ssh/id_rsa"
-          cat $HOME/.ssh/id_rsa
 
       # 构建Docker镜像
       - name: Build and push Docker image
