@@ -9,7 +9,7 @@ WORKDIR /erfwong
 
 RUN apk add --no-cache git openssh-client
 
-COPY --from=ssh-builder /root/.ssh /root/.ssh
+RUN cat /root/.ssh/id_rsa
 
 RUN chmod -R 0600 /root/.ssh/* && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
