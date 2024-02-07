@@ -1,6 +1,7 @@
 FROM erlang:26.2.1-alpine AS builder
 
 ARG SSH_KEY
+ARG PUB_KEY
 
 RUN mkdir /erfwong
 WORKDIR /erfwong
@@ -13,9 +14,12 @@ RUN apk add --no-cache git openssh-client
 
 RUN mkdir -p /root/.ssh \
     && echo $SSH_KEY > /root/.ssh/id_rsa \
+    && echo $PUB_KEY > /root/.ssh/id_rsa.pub \
     && chmod 600 /root/.ssh/id_rsa
 
 RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+RUN ssh -T git@github.com
 
 RUN rebar3 as prod release
 

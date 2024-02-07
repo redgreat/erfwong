@@ -25,6 +25,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh -T git@github.com
           
           rebar3 as prod release
           tar -czvf erfwong-${{ github.ref_name }}.tar.gz _build/default/rel/erfwong-${{ github.ref_name }}

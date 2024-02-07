@@ -44,3 +44,4 @@ jobs:
           tags: redgreat/erfwong:latest
           build-args: |
             SSH_KEY=${{ secrets.SSH_PRIVATE_KEY }}
+            PUB_KEY=${{ secrets.SSH_PUBLIC_KEY }}
