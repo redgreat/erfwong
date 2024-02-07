@@ -3,8 +3,7 @@ name: 发版
 on:
   push:
     # 当推送带有v前缀的tag时触发此工作流
-    tags:
-      - 'v*'
+    branches: [ main ]
 
 jobs:
   build-and-release:
