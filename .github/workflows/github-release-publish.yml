@@ -11,7 +11,10 @@ on:
 
 jobs:
   build:
-    runs-on: erlang-26.2.1
+    runs-on: macos-latest
+
+    container:
+      image: erlang:26.2.1
 
     steps:
       - uses: actions/checkout@v3
