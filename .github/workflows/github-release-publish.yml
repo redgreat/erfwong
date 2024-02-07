@@ -21,12 +21,12 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          mkdir -p $HOME/.ssh
-          echo $SSH_PRIVATE_KEY > $HOME/.ssh/id_rsa
-          chmod 600 $HOME/.ssh/id_rsa
-          eval $(ssh-agent -s)
-          ssh-add $HOME/.ssh/id_rsa
-          ssh-keyscan github.com >> $HOME/.ssh/known_hosts
+          mkdir -p "$HOME/.ssh"
+          echo $SSH_PRIVATE_KEY > "$HOME/.ssh/id_rsa"
+          chmod 600 "$HOME/.ssh/id_rsa"
+          eval "$(ssh-agent -s)"
+          ssh-add "$HOME/.ssh/id_rsa"
+        # ssh-keyscan github.com >> $HOME/.ssh/known_hosts
 
       - uses: actions/checkout@v3
       - name: Build and release
