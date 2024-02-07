@@ -1,27 +1,21 @@
 name: 发版
 
 on:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+    tags:
+      - 'release*'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    container:
-      image: erlang:26.2.1
+    runs-on: erlang-26.2.1
 
     steps:
       - uses: actions/checkout@v3
       - name: Build and release
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PUBLIC_KEY" > ~/.ssh/id_rsa.pub
