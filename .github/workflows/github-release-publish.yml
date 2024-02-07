@@ -25,9 +25,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
           chmod 600 "$HOME/.ssh/id_rsa"
           ssh-keyscan github.com >> $HOME/.ssh/known_hosts
-          git config –-global user.name 'wangcw'
-          git config –-global user.email 'rubygreat@msn.com'
-          echo "yes" | ssh -T git@github.com
+          ssh -T git@github.com
 
       - uses: actions/checkout@v3
       - name: Build and release
