@@ -1,8 +1,8 @@
 name: 发布docker镜像
 on:
   push:
-    # 配置触发条件，例如只在推送到master分支时触发
-    branches: [ main ]
+    tags:
+      - 'docker*'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 使用最新版本的Ubuntu运行器
