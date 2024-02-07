@@ -44,7 +44,8 @@ jobs:
           context: .
           push: true
           tags: redgreat/erfwong:latest
-          build-args: |
-            SSH_KEY=SSH_PRIVATE_KEY
+          target: builder
+          cache-from: type=registry,ref=redgreat/erfwong:cache
+          cache-to: type=inline
           ssh: |
             path: ~/.ssh

@@ -1,7 +1,5 @@
 FROM erlang:26.2.1-alpine AS builder
 
-ARG SSH_KEY
-
 RUN mkdir /erfwong
 WORKDIR /erfwong
 
@@ -11,11 +9,9 @@ WORKDIR /erfwong
 
 RUN apk add --no-cache git openssh-client
 
-RUN mkdir -p /root/.ssh \
-    && echo $SSH_KEY > /root/.ssh/id_rsa \
-    && chmod 600 /root/.ssh/id_rsa
+COPY --from=builder /root/.ssh /root/.ssh
 
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+RUN chmod -R 0600 /root/.ssh/* && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN rebar3 as prod release
 
