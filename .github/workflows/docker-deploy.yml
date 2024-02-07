@@ -10,9 +10,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        run: | 
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy/id_rsa
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" > deploy/id_rsa.pub
           
       - uses: actions/download-artifact@v3
         with:
@@ -41,6 +38,12 @@ jobs:
       #     chmod 600 "$HOME/.ssh/id_rsa"
       #     eval "$(ssh-agent -s)"
       #     ssh-add "$HOME/.ssh/id_rsa"
+
+      # 准备 SSH Key
+      - name: Prepare SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy/id_rsa
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > deploy/id_rsa.pub
 
       # 构建Docker镜像
       - name: Build and push Docker image
