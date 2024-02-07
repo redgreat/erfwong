@@ -13,7 +13,10 @@ RUN apk add --no-cache git openssh-client \
     && mkdir -p /root/.ssh \
     && echo $SSH_KEY > /root/.ssh/id_rsa \
     && chmod 600 /root/.ssh/id_rsa \
-    && ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+RUN cat /root/.ssh/id_rsa
 
 RUN rebar3 as prod release
 
