@@ -42,4 +42,4 @@ jobs:
           push: true
           tags: redgreat/erfwong:latest
           build-args: |
-            SSH_KEY=$(cat $HOME/.ssh/id_rsa)
+            SSH_KEY="$(cat $HOME/.ssh/id_rsa)"
