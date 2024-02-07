@@ -13,9 +13,10 @@ RUN apk add --no-cache git openssh-client \
     && mkdir -p /root/.ssh \
     && echo $SSH_KEY > /root/.ssh/id_rsa \
     && chmod 600 /root/.ssh/id_rsa \
-    && ssh-keyscan github.com >> /root/.ssh/known_hosts \
+    && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 RUN rebar3 as prod release
+
 RUN ls /erfwong/_build/prod/rel/erfwong
 
 FROM alpine:3.18 AS runner
