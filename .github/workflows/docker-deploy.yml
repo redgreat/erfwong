@@ -32,10 +32,13 @@ jobs:
           chmod 600 "$HOME/.ssh/id_rsa"
           eval "$(ssh-agent -s)"
           ssh-add "$HOME/.ssh/id_rsa"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
 
       # 构建Docker镜像
       - name: Build and push Docker image
         id: docker_build
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
         uses: docker/build-push-action@v2
         with:
           context: .
