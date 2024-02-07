@@ -36,7 +36,7 @@ jobs:
 
       # 准备 SSH Key
       - name: Upload SSH keys as artifact
-        uses: actions/download-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: ssh-keys
           path: deploy
