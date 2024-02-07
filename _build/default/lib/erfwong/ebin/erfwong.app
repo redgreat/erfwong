@@ -1,0 +1,12 @@
+{application,erfwong,
+             [{description,[26085,24120,25968,25454,25552,20379,65,80,73]},
+              {vsn,"0.1.0"},
+              {registered,[]},
+              {mod,{erfwong_app,[]}},
+              {applications,[kernel,stdlib,erf,lager,mysql_pool]},
+              {env,[]},
+              {modules,[erfwong_app,erfwong_callback,erfwong_postprocess,
+                        erfwong_preprocess,erfwong_sup,erfwong_utils]},
+              {maintainers,[wangcw]},
+              {licenses,["Apache-2.0"]},
+              {links,[{"Github","https://github.com/redgreat/erfwong"}]}]}.

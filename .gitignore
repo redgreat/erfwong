@@ -15,10 +15,9 @@ deps
 
 # rebar 3
 .rebar3
-_build/
+_build/docs
 _checkouts/
 config/sys.config
 config/vm.args
 logs
-rebar.lock
 rebar3.crashdump
