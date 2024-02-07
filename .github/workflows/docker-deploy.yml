@@ -32,19 +32,15 @@ jobs:
           chmod 600 "$HOME/.ssh/id_rsa"
           eval "$(ssh-agent -s)"
           ssh-add "$HOME/.ssh/id_rsa"
-          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
+          cat $HOME/.ssh/id_rsa
 
       # 构建Docker镜像
       - name: Build and push Docker image
         id: docker_build
-        env:
-          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
           tags: redgreat/erfwong:latest
-          cache-from: type=registry,ref=redgreat/erfwong:cache
-          cache-to: type=inline
-          ssh: |
-            path: ~/.ssh
+          build-args: |
+            SSH_KEY=${{ secrets.SSH_PRIVATE_KEY }}
