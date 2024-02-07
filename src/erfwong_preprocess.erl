@@ -31,7 +31,10 @@ preprocess(#{method := Method, path := Path, headers := Headers} = Request) ->
             Authorization = proplists:get_value(<<"x-api-key">>, Headers, undefined),
             case is_authorized(Authorization) of
                 false ->
-                    {stop, {403, [], #{<<"msg">> => unicode:characters_to_binary("鉴权失败！"), <<"data">> => []}}};
+                    {stop,
+                        {403, [], #{
+                            <<"msg">> => unicode:characters_to_binary("鉴权失败！"), <<"data">> => []
+                        }}};
                 true ->
                     PostInitT = erlang:timestamp(),
                     Context = maps:get(context, Request, #{}),

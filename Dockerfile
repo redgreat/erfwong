@@ -1,6 +1,6 @@
-ARG SSH_KEY
-
 FROM erlang:26.2.1-alpine AS builder
+
+ARG SSH_KEY
 
 RUN mkdir /erfwong
 WORKDIR /erfwong

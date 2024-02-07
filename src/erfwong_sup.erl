@@ -33,30 +33,30 @@ start_link() -> supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 init([]) ->
     case application:get_env(erfwong, api_port) of
-    {ok, ApiPort} ->
-        lager:info("应用启动端口号： ~p~n", [ApiPort]),
-        ErfWongAPIConf = #{
-        name => erfwong_api,
-        spec_path => <<"priv/apis/erfwong.json">>,
-        static_routes => [{<<"/:Resource">>, {dir, <<"priv/static">>}}],
-        callback => erfwong_callback,
-        preprocess_middlewares => [erfwong_preprocess],
-        postprocess_middlewares => [erfwong_postprocess],
-        port => ApiPort,
-        swagger_ui => true,
-        log_level => error
-        },
-        ErfWongChildSpec = {
-            api_server,
-            {erf, start_link, [ErfWongAPIConf]},
-            permanent,
-            5000,
-            worker,
-            [erf]
-        },
-        {ok, {{one_for_one, 5, 10}, [ErfWongChildSpec]}};
-    undefined ->
-        lager:error("未在配置文件中找到端口号配置！")
+        {ok, ApiPort} ->
+            lager:info("应用启动端口号： ~p~n", [ApiPort]),
+            ErfWongAPIConf = #{
+                name => erfwong_api,
+                spec_path => <<"priv/apis/erfwong.json">>,
+                static_routes => [{<<"/:Resource">>, {dir, <<"priv/static">>}}],
+                callback => erfwong_callback,
+                preprocess_middlewares => [erfwong_preprocess],
+                postprocess_middlewares => [erfwong_postprocess],
+                port => ApiPort,
+                swagger_ui => true,
+                log_level => error
+            },
+            ErfWongChildSpec = {
+                api_server,
+                {erf, start_link, [ErfWongAPIConf]},
+                permanent,
+                5000,
+                worker,
+                [erf]
+            },
+            {ok, {{one_for_one, 5, 10}, [ErfWongChildSpec]}};
+        undefined ->
+            lager:error("未在配置文件中找到端口号配置！")
     end.
 
 %%%===================================================================

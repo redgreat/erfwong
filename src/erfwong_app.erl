@@ -33,7 +33,7 @@ start(_StartType, _StartArgs) ->
         lager:info("API_KEY参数获取成功!")
     catch
         error:Error ->
-        lager:error("配置文件中获取API_KEY参数获取失败： ~p~n", [Error])
+            lager:error("配置文件中获取API_KEY参数获取失败： ~p~n", [Error])
     end,
     erfwong_sup:start_link().
 

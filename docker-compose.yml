@@ -3,9 +3,6 @@ version: '3.1'
 services:
     erfwong:
         image: redgreat/erfwong
-        environment:
-            ERFWONG_PORT: 8080
-            ERFWONG_APPS: /opt/erfwong
         volumes:
             - ./:/opt/erfwong
         ports:

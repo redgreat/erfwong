@@ -1,0 +1,49 @@
+name: Docker Image Deployment
+on:
+  push:
+    # 配置触发条件，例如只在推送到master分支时触发
+    branches: [ main ]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 使用最新版本的Ubuntu运行器
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 设置Docker构建环境
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      # 登录Docker Hub
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 准备 SSH Key
+      - name: Prepare SSH key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p &#126;/.ssh
+          echo "$SSH_PRIVATE_KEY" > &#126;/.ssh/id_rsa
+          chmod 600 &#126;/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add &#126;/.ssh/id_rsa
+
+      # 构建Docker镜像
+      - name: Build and push Docker image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: redgreat/erfwong:latest
+          build-args: |
+            SSH_KEY=$(cat &#126;/.ssh/id_rsa)
+
+      # 可选：输出构建结果
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
