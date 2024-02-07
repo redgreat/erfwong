@@ -44,7 +44,7 @@ jobs:
           context: .
           push: true
           tags: redgreat/erfwong:latest
-          target: builder
+          target: ssh-builder
           cache-from: type=registry,ref=redgreat/erfwong:cache
           cache-to: type=inline
           ssh: |
