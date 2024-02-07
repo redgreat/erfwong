@@ -27,11 +27,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          mkdir -p &#126;/.ssh
-          echo "$SSH_PRIVATE_KEY" > &#126;/.ssh/id_rsa
-          chmod 600 &#126;/.ssh/id_rsa
+          mkdir -p "$HOME/.ssh"
+          echo "$SSH_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
+          chmod 600 "$HOME/.ssh/id_rsa"
           eval "$(ssh-agent -s)"
-          ssh-add &#126;/.ssh/id_rsa
+          ssh-add "$HOME/.ssh/id_rsa"
 
       # 构建Docker镜像
       - name: Build and push Docker image
@@ -43,7 +43,3 @@ jobs:
           tags: redgreat/erfwong:latest
           build-args: |
             SSH_KEY=$(cat &#126;/.ssh/id_rsa)
-
-      # 可选：输出构建结果
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
