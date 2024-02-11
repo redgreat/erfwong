@@ -1,11 +1,8 @@
 FROM redgreat/erlang-ssh-buider:26.2.1-alpine AS builder
 
-RUN mkdir /erfwong
 WORKDIR /erfwong
 
 COPY . .
-
-RUN apk add --no-cache git openssh-client
 
 RUN rebar3 as prod release
 

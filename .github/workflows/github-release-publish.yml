@@ -17,6 +17,13 @@ jobs:
       image: redgreat/erlang-ssh-buider:26.2.1-alpine
 
     steps:
+      # 登录Docker Hub
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - uses: actions/checkout@v3
       - name: Build and release
         run: |
