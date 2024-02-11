@@ -31,6 +31,3 @@ jobs:
           context: .
           push: true
           tags: redgreat/erfwong:latest
-          build-args: |
-            --build-arg SSH_KEY = ${{ secrets.SSH_PRIVATE_KEY }}
-            --build-arg PUB_KEY = ${{ secrets.SSH_PUBLIC_KEY }}
