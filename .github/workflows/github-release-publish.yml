@@ -23,9 +23,10 @@ jobs:
           mkdir -p ~/.ssh
           echo ${{ secrets.SSH_PUBLIC_KEY }} > ~/.ssh/id_rsa
           echo ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa.pub
-          sed -i -e 's/-----BEGIN OPENSSH PRIVATE KEY----- //g' -e 's/ -----END OPENSSH PRIVATE KEY-----//g' -e 's/ /\n/g' -e '1i\-----BEGIN OPENSSH PRIVATE KEY-----' -e '$a\-----END OPENSSH PRIVATE KEY-----' id_rsa
+          sed -i -e 's/-----BEGIN OPENSSH PRIVATE KEY----- //g' -e 's/ -----END OPENSSH PRIVATE KEY-----//g' -e 's/ /\n/g' -e '1i\-----BEGIN OPENSSH PRIVATE KEY-----' -e '$a\-----END OPENSSH PRIVATE KEY-----' ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           chmod 644 ~/.ssh/id_rsa.pub
+          RUN ssh -T git@github.com
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           
           rebar3 as prod release

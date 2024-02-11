@@ -21,6 +21,8 @@ RUN mkdir -p /root/.ssh \
 
 RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
+RUN ssh -T git@github.com
+
 RUN rebar3 as prod release
 
 FROM alpine:3.18 AS runner
