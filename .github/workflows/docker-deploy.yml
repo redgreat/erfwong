@@ -1,9 +1,9 @@
 name: 发布docker镜像
 on:
   push:
-    tags:
-      - 'docker*'
-    # branches: [ "main" ]
+    # tags:
+    #  - 'docker*'
+    branches: [ "main" ]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 使用最新版本的Ubuntu运行器
@@ -23,29 +23,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 准备 SSH Key
-      # - name: Prepare SSH key
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #   run: |
-      #     mkdir -p "$HOME/.ssh"
-      #     echo "$SSH_PRIVATE_KEY" > "$HOME/.ssh/id_rsa"
-      #     chmod 600 "$HOME/.ssh/id_rsa"
-      #     eval "$(ssh-agent -s)"
-      #     ssh-add "$HOME/.ssh/id_rsa"
-
-      # 准备 SSH Key
-      - name: Upload SSH keys as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ssh-keys
-          path: deploy
-
-      - name: Prepare SSH key
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy/id_rsa
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" > deploy/id_rsa.pub
-
       # 构建Docker镜像
       - name: Build and push Docker image
         id: docker_build
@@ -54,6 +31,6 @@ jobs:
           context: .
           push: true
           tags: redgreat/erfwong:latest
-          secrets: |
-            SSH_PRIVATE_KEY
-            SSH_PUBLIC_KEY
+          build-args: |
+            --build-arg SSH_KEY = ${{ secrets.SSH_PRIVATE_KEY }}
+            --build-arg PUB_KEY = ${{ secrets.SSH_PUBLIC_KEY }}

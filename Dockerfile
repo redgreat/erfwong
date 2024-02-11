@@ -12,19 +12,14 @@ WORKDIR /erfwong
 
 RUN apk add --no-cache git openssh-client
 
-# RUN mkdir -p /root/.ssh \
-#     && echo $SSH_KEY > /root/.ssh/id_rsa \
-#     && echo $PUB_KEY > /root/.ssh/id_rsa.pub \
-#     && chmod 600 /root/.ssh/id_rsa \
-#     && chmod 644 /root/.ssh/id_rsa.pub
-
-COPY deploy/id_rsa /root/.ssh/id_rsa
-COPY deploy/id_rsa.pub /root/.ssh/id_rsa.pub
-RUN chmod 600 /root/.ssh/id_rsa
+RUN mkdir -p /root/.ssh \
+    && echo $SSH_KEY > /root/.ssh/id_rsa \
+    && echo $PUB_KEY > /root/.ssh/id_rsa.pub \
+    && sed -i -e 's/-----BEGIN OPENSSH PRIVATE KEY----- //g' -e 's/ -----END OPENSSH PRIVATE KEY-----//g' -e 's/ /\n/g' -e '1i\-----BEGIN OPENSSH PRIVATE KEY-----' -e '$a\-----END OPENSSH PRIVATE KEY-----' id_rsa \
+    && chmod 600 /root/.ssh/id_rsa \
+    && chmod 644 /root/.ssh/id_rsa.pub
 
 RUN ssh-keyscan github.com > /root/.ssh/known_hosts
-
-RUN ssh -T git@github.com
 
 RUN rebar3 as prod release
 
